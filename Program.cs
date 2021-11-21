@@ -1,0 +1,82 @@
+﻿using System;
+using System.Linq;
+
+namespace CodefirstCountry
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            CountryContext db = new CountryContext();
+            while (true)
+            {
+                Console.WriteLine("Choose query:");
+                Console.WriteLine("1.Participants  2.Sports 3.Countries 4.GetPartById 5.GetSportById 6.GetCountryById");
+                int choice=int.Parse(Console.ReadLine());
+                int id = 0;
+                switch (choice)
+                {
+                    
+                    case 1:
+                        foreach (var item in db.Participants)
+                        {
+                            Console.WriteLine(item.Id+" "+item.Firstname+" "+item.LastName+" "+item.Country.CountryName);
+                        }
+                        break;
+                    case 2:
+                        foreach (var item in db.Sports)
+                        {
+                            Console.WriteLine(item.Id + " " + item.SportName );
+                        }
+                        break;
+                    case 3:
+                        foreach (var item in db.Countries)
+                        {
+                            Console.WriteLine(item.Id + " " + item.CountryName);
+                        }
+                        break;
+                    case 4:
+                        id = int.Parse(Console.ReadLine());
+                        foreach (var item in db.Participants.ToList())
+                        {
+                            if (item.Id==id)
+                            {
+                                
+                                Console.WriteLine(item.Firstname + " " + item.LastName + " " + item.Country.CountryName );
+                                break;
+                            }
+                        }
+                        break;
+                    case 5:
+                        id = int.Parse(Console.ReadLine());
+                        foreach (var item in db.Sports.ToList())
+                        {
+                            if (item.Id == id)
+                            {
+                                Console.WriteLine(item.SportName + " " + item.Participants.Count + " ");
+                                break;
+                            }
+                        }
+                        break;
+                    case 6:
+                        id = int.Parse(Console.ReadLine());
+                        foreach (var item in db.Countries.ToList())
+                        {
+                            if (item.Id == id)
+                            {
+                                Console.WriteLine(item.CountryName + " " + item.Participants.Count + " ");
+                                break;
+                            }
+                        }
+                        break;
+
+                    default:
+                        break;
+
+
+                }
+                Console.WriteLine("\n\n");
+            }
+        }
+    }
+}
