@@ -18,19 +18,19 @@ namespace CodefirstCountry
                 {
                     
                     case 1:
-                        foreach (var item in db.Participants)
+                        foreach (var item in db.Participants.ToList())
                         {
                             Console.WriteLine(item.Id+" "+item.Firstname+" "+item.LastName+" "+item.Country.CountryName);
                         }
                         break;
                     case 2:
-                        foreach (var item in db.Sports)
+                        foreach (var item in db.Sports.ToList())
                         {
                             Console.WriteLine(item.Id + " " + item.SportName );
                         }
                         break;
                     case 3:
-                        foreach (var item in db.Countries)
+                        foreach (var item in db.Countries.ToList())
                         {
                             Console.WriteLine(item.Id + " " + item.CountryName);
                         }
@@ -43,6 +43,10 @@ namespace CodefirstCountry
                             {
                                 
                                 Console.WriteLine(item.Firstname + " " + item.LastName + " " + item.Country.CountryName );
+                                foreach (var medal in item.ParticipantMedals.ToList())
+                                {
+                                    Console.WriteLine(medal.Medal.MedalType);
+                                }
                                 break;
                             }
                         }
@@ -53,7 +57,7 @@ namespace CodefirstCountry
                         {
                             if (item.Id == id)
                             {
-                                Console.WriteLine(item.SportName + " " + item.Participants.Count + " ");
+                                Console.WriteLine(item.SportName + " " + item.Participants.ToList().Count + " ");                                
                                 break;
                             }
                         }
@@ -64,7 +68,19 @@ namespace CodefirstCountry
                         {
                             if (item.Id == id)
                             {
-                                Console.WriteLine(item.CountryName + " " + item.Participants.Count + " ");
+                                int sp = 0;
+                                int med = 0;
+                                foreach (var part in item.Participants.ToList())
+                                {
+                                    if (part.Sport != null)
+                                    {
+                                        sp++;
+                                    }
+                                    med+=part.ParticipantMedals.Count;
+                                  
+                                }
+                                Console.WriteLine(item.CountryName + " " + item.Participants.ToList().Count + " "+sp+" "+med);
+                                
                                 break;
                             }
                         }

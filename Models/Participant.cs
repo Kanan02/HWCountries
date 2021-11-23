@@ -10,8 +10,8 @@ namespace CodefirstCountry.Models
         public int Id { get; set; }
         public string Firstname { get; set; }
         public string LastName { get; set; }
-        public Sport Sport { get; set; }
-        public Country Country { get; set; }
-        public virtual ICollection<ParticipantMedal> ParticipantMedals { get; set; }
+        public virtual Sport Sport { get; set; }
+        public virtual Country Country { get; set; }
+        public virtual ICollection<ParticipantMedal> ParticipantMedals { get; set; }=new List<ParticipantMedal>();
     }
 }

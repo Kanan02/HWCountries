@@ -15,7 +15,7 @@ namespace CodefirstCountry
         public DbSet<ParticipantMedal> ParticipantMedals { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=Step2;Integrated Security=true");
+            optionsBuilder.UseLazyLoadingProxies() .UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=Step2;Integrated Security=true");
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
